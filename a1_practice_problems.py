@@ -28,6 +28,7 @@ def absolute(n: int) -> int:
         the absolute value of the passed in number
     """
     raise NotImplementedError("absolute")
+    
 
 
 def factorial(n: int) -> int:
@@ -139,3 +140,4 @@ if __name__ == "__main__":
     assert duck_duck_goose(names) == ["roscoe", "law"]
 
     print("All tests passed!")
+

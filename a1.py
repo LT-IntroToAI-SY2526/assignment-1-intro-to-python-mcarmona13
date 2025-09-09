@@ -1,5 +1,5 @@
 # Assignment 1: AI-Generated Python Problems
-# Name: [Your Name Here]
+# Name: Max Carmona
 
 """
 AI-Generated Problem Set
@@ -20,7 +20,20 @@ Remember: The goal is to LEARN, not just get working code!
 
 """
 MY ORIGINAL AI PROMPT:
-[Paste the prompt you used to generate your problem set here]
+["I'm learning Python basics in a high school programming class. I'm new to programming 
+but have been learning variables, data types, conditionals, loops, and functions. 
+Can you create 6 practice problems that cover:
+- Variables and basic data types
+- Conditionals (if/else/else if) 
+- Loops (for and while)
+- Functions
+- Basic list operations
+
+Make them progressively more challenging and include clear instructions with 
+example inputs/outputs. I want problems that complement basic exercises like 
+absolute value, factorial, and list operations."]
+
+
 
 Example: "I'm learning Python basics in a high school programming class. 
 I have some experience with Java. Can you create 5-7 practice problems that cover..."
@@ -41,8 +54,21 @@ True if the number is even, False if it's odd.
 Example inputs/outputs:
 - is_even(4) should return True
 - is_even(7) should return False
-"""
 
+
+PROBLEM 1: [Temperature Converter/A functions called 'celsius_to_fahrenheit' that takes a temperature in Celsius
+and converts it to fahrenheit using the formula: F = (C * 9/5) + 32]
+
+
+
+
+
+
+
+
+
+
+"""
 
 
 
