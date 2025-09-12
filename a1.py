@@ -192,14 +192,13 @@ def check_password_strength(password):
 """
 PROBLEM 3: [ List Statitsics Calculator/A function called 'calculate_stats' 
 that takes a list of numbers and a dictionary with the following statistics: ]
-- "":
-- "":
-- "":
-- "":
-- "":
-- "":
-- "":
-- "":
+- "count": number of items in the list
+- "sum": sum of all numbers
+- "average": mean of the numbers
+- "min": smallest number
+- "max": largest number
+- "even_count": count of even numbers
+- "odd_count": count of odd numbers
 
 Example inputs/outputs:
 - calculate_stats([1,2,3,4,5]) should return: 
@@ -270,19 +269,123 @@ Example inputs/outputs:
 - find_word_patterns("A man a plan a canal panama") might return:
 {"same_letter": ["A", "a", "a"], "palindromes": ["A", "a", "a"], "only_vowels": ["A", "a", "a"], "long_words": ["panama"]}
 """
+def find_word_patterns(sentence):
+    """
+    MY APPROACH: 
+    1. Split sentence into words 
+    2. For each word, check all pattern conditions 
+    3. Add matching words to appropriate lists
+    4. Return dictionary with all pattern lists
+    """
+    words = sentence.split()
+    same_letter = []
+    palindromes = []
+    only_vowels = []
+    long_words = []
+
+    vowels = "aeiouAEIOU"
+
+    for word in words:
+        # removes punctuation for pattern checking 
+        clean_word = ""
+        for char in word:
+            # FIXED: was isaplha(), should be isalpha()
+            if char.isalpha():
+                clean_word += char
+
+        if not clean_word: # skips if no letters
+            continue
+
+        # FIXED: checks if starts and ends with same letter (was missing this logic)
+        if clean_word[0].lower() == clean_word[-1].lower():
+            same_letter.append(word)
+
+        # FIXED: check if palindrome (was putting this in same_letter check)
+        if clean_word.lower() == clean_word.lower()[::-1]:
+            palindromes.append(word)
+
+        # check if only vowels
+        all_vowels = True
+        for char in clean_word:
+            if char not in vowels:
+                all_vowels = False
+                break
+        if all_vowels:
+            only_vowels.append(word)  # FIXED: was only_vowels.qppend
+
+        # check if longer than 5 characters
+        if len(clean_word) > 5:
+            long_words.append(word)  # FIXED: was long_words.qppend(word)
+
+    return {
+        "same_letter": same_letter,
+        "palindromes": palindromes,
+        "only_vowels": only_vowels,
+        "long_words": long_words
+    }
 
 
+
+"""
+PROBLEM 5: [Number Sequence Generator/Write a function called 'generate_sequence' 
+that takes three parameters: ]
+- start: starting number
+- length: how many numbers to generate
+- pattern: either "fibonacci", "squares", "primes", or "even"
+
+The function should return a list of numbers following the specified pattern.
+
+- "squares": 1, 4, 9, 16, 25, ...
+- "primes": 2, 3, 5, 7, 11, 13, ...
+- "even": 2, 4, 6, 8, 10, ...
+
+"""        
+def generate_sequence(start, length, pattern):
+    """
+    MY APPROACH:
+    1. Use if/elif to handle different patterns
+    2. For each pattern, use appropriate logic to generate numbers
+    3. Use loops to build the sequence
+    4. Return the list of generated numbers
+    """
+
+    sequence = []
+
+    if pattern == "squares":
+        # perfect squares starting from start
+        for i in range(length):
+            square = (start + i) ** 2
+            sequence.append(square)
+
+    elif pattern == "primes":
+        # prime numbers
+        def is_prime(n):
+            if n < 2:
+                return False
+            for i in range(2, int(n ** 0.5) + 1):  # FIXED: was .5, should be 0.5
+                if n % i == 0:
+                    return False
+            return True
         
+        num = 2 # start checking from 2
+        while len(sequence) < length:
+            if is_prime(num):
+                sequence.append(num)
+            num += 1
 
+    elif pattern == "even":
+        # even numbers starting from first even >= start
+        if start % 2 == 0:
+            current = start
+        else:
+            current = start + 1 
 
+        for i in range(length):
+            sequence.append(current)  # FIXED: was sequence.qppend(current)
+            current += 2
 
-
-
-
-
-
-
-
+    return sequence
+        
 
 # =============================================================================
 # PART 3: TESTING YOUR SOLUTIONS
@@ -300,19 +403,39 @@ print(f"is_even(4): {is_even(4)}")  # Should print True
 print(f"is_even(7): {is_even(7)}")  # Should print False
 """
 
-print("Testing Problem 1:")
-# Add your tests here
 
-print("\nTesting Problem 2:")
-# Add your tests here
+print("\n")
+print("\n")
+print("\n")
+print("\n")
 
-print("\nTesting Problem 3:")
-# Add your tests here
 
-print("\nTesting Problem 4:")
-# Add your tests here
+print("Testing Problem 1: Temperature Converter")
+print(f"celsius_to_fahrenheit(0): {celsius_to_fahrenheit(0)}")  # Should be (32.0, "Very Cold")
+print(f"celsius_to_fahrenheit(25): {celsius_to_fahrenheit(25)}")  # Should be (77.0, "Mild")
+print(f"celsius_to_fahrenheit(-10): {celsius_to_fahrenheit(-10)}")  # Should be (14.0, "Freezing")
+    
+print("\nTesting Problem 2: Password Strength")
+print(f"check_password_strength('password'): {check_password_strength('password')}")  # Should be (2, "Weak")
+print(f"check_password_strength('Password123!'): {check_password_strength('Password123!')}")  # Should be (5, "Very Strong")
+    
+print("\nTesting Problem 3: List Statistics")
+test_list = [1, 2, 3, 4, 5]
+stats = calculate_stats(test_list)
+print(f"calculate_stats({test_list}): {stats}")
+    
+print("\nTesting Problem 4: Word Patterns")
+test_sentence = "A man a plan a canal panama"
+patterns = find_word_patterns(test_sentence)
+print(f"find_word_patterns('{test_sentence}'): {patterns}")
+    
+print("\nTesting Problem 5: Number Sequences")
+print(f"generate_sequence(1, 4, 'squares'): {generate_sequence(1, 4, 'squares')}")
+print(f"generate_sequence(2, 5, 'primes'): {generate_sequence(2, 5, 'primes')}")
 
-print("\nTesting Problem 5:")
-# Add your tests here
+print("\n")
+print("\n")
+print("\n")
+print("\n")
 
 
