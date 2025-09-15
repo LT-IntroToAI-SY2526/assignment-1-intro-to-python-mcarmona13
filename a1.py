@@ -31,7 +31,7 @@ Can you create 6 practice problems that cover:
 
 Make them progressively more challenging and include clear instructions with 
 example inputs/outputs. I want problems that complement basic exercises like 
-absolute value, factorial, and list operations."]
+absolute value, factorial, and list operations."] 
 
 
 
