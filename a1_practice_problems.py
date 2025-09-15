@@ -17,6 +17,7 @@ Make sure to complete the a1.py problems which should be AI generated.
 from typing import List, TypeVar
 
 
+
 def absolute(n: int) -> int:
     """Gives the absolute value of the passed in number. Cannot use the built in
     function `abs`.
@@ -27,7 +28,9 @@ def absolute(n: int) -> int:
     Returns:
         the absolute value of the passed in number
     """
-    raise NotImplementedError("absolute")
+    if n < 0:
+        return -1 * n
+    return n 
     
 
 
@@ -41,10 +44,12 @@ def factorial(n: int) -> int:
     Returns:
         factorial of the passed in number
     """
-    raise NotImplementedError("factorial")
-
+    for num in range(1, n+1):
+        result = result * num  # result *= num
+    return result
 
 T = TypeVar("T")
+
 
 
 def every_other(lst: List[T]) -> List[T]:
@@ -58,7 +63,16 @@ def every_other(lst: List[T]) -> List[T]:
     Returns:
         a list of every of other item in the original list starting with the first
     """
-    raise NotImplementedError("every_other")
+    # This is the pythonic way
+    return lst[::2]
+
+    # This is the java way
+    # result = []
+    # for index in range(len(lst)):
+    #     if index % 2 == 0:
+    #         result.append(lst[index])
+    # return result
+
 
 
 def sum_list(lst: List[int]) -> int:
@@ -71,8 +85,14 @@ def sum_list(lst: List[int]) -> int:
     Returns:
         the sum of the passed in list
     """
-    # This is how the 
+     # This is how the built in function is used
     # return sum(lst)
+    total = 0
+    for element in lst:
+        total += element
+    # print(total)
+    return total
+
 
 
 def mean(lst: List[int]) -> float:
@@ -84,7 +104,8 @@ def mean(lst: List[int]) -> float:
     Returns:
         the mean of the passed in list
     """
-    raise NotImplementedError("mean")
+    return sum_list(lst) / len(lst) if lst else 0
+
 
 
 def median(lst: List[int]) -> float:
@@ -99,7 +120,12 @@ def median(lst: List[int]) -> float:
     Returns:
         the median of the passed in list
     """
-    raise NotImplementedError("median")
+    if len(lst) % 2 == 1:
+            return lst[len(lst) // 2 ]
+    else:
+        m1 = len(lst) // 2
+        m2 = m1 - 1
+        return (lst[m1] + lst[m2]) / 2
 
 
 def duck_duck_goose(lst: List[str]) -> List[str]:
